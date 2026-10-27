@@ -1,0 +1,348 @@
+[
+  
+    "gameweek": 3,
+    "kickoff": "Sun 6 Sep 2026, 14:00 BST",
+    "status": "C",
+    "home": {
+      "team": "Everton",
+      "score": 2
+    },
+    "away": {
+      "team": "Man Utd",
+      "score": 2
+    },
+    "goals": [
+      {
+        "time": "46'00",
+        "team": "Man Utd",
+        "player": "Bryan Mbeumo",
+        "type": "G"
+      },
+      {
+        "time": "83'00",
+        "team": "Everton",
+        "player": "Tyrique George",
+        "type": "G"
+      },
+      {
+        "time": "88'00",
+        "team": "Man Utd",
+        "player": "Benjamin Sesko",
+        "type": "G"
+      },
+      {
+        "time": "90+6'00",
+        "team": "Everton",
+        "player": "Ainsley Maitland-Niles",
+        "type": "G"
+      }
+    ],
+    "cards": [
+      {
+        "time": "13'00",
+        "team": "Everton",
+        "player": "Harrison Armstrong",
+        "card": "Y"
+      },
+      {
+        "time": "34'00",
+        "team": "Everton",
+        "player": "Brennan Johnson",
+        "card": "Y"
+      },
+      {
+        "time": "62'00",
+        "team": "Man Utd",
+        "player": "Luke Shaw",
+        "card": "Y"
+      },
+      {
+        "time": "64'00",
+        "team": "Everton",
+        "player": "Merlin Röhl",
+        "card": "Y"
+      },
+      {
+        "time": "79'00",
+        "team": "Man Utd",
+        "player": "Harry Maguire",
+        "card": "Y"
+      },
+      {
+        "time": "81'00",
+        "team": "Man Utd",
+        "player": "Diogo Dalot",
+        "card": "Y"
+      }
+    ]
+  },
+  {
+    "gameweek": 4,
+    "kickoff": "Sun 13 Sep 2026, 16:30 BST",
+    "status": "C",
+    "home": {
+      "team": "Man Utd",
+      "score": 0
+    },
+    "away": {
+      "team": "Man City",
+      "score": 1
+    },
+    "goals": [
+      {
+        "time": "60'00",
+        "team": "Man City",
+        "player": "Erling Haaland",
+        "type": "G"
+      }
+    ],
+    "cards": [
+      {
+        "time": "23'00",
+        "team": "Man City",
+        "player": "Phil Foden",
+        "card": "R"
+      },
+      {
+        "time": "79'00",
+        "team": "Man City",
+        "player": "Josko Gvardiol",
+        "card": "Y"
+      },
+      {
+        "time": "80'00",
+        "team": "Man City",
+        "player": "Enzo Fernández",
+        "card": "Y"
+      },
+      {
+        "time": "81'00",
+        "team": "Man Utd",
+        "player": "Harry Maguire",
+        "card": "Y"
+      }
+    ]
+  },
+  {
+    "gameweek": 5,
+    "kickoff": "Sun 20 Sep 2026, 16:30 BST",
+    "status": "C",
+    "home": {
+      "team": "Fulham",
+      "score": 1
+    },
+    "away": {
+      "team": "Man Utd",
+      "score": 1
+    },
+    "goals": [
+      {
+        "time": "63'00",
+        "team": "Fulham",
+        "player": "Lisandro Martínez",
+        "type": "O"
+      },
+      {
+        "time": "89'00",
+        "team": "Man Utd",
+        "player": "Matheus Cunha",
+        "type": "G"
+      }
+    ],
+    "cards": [
+      {
+        "time": "45'00",
+        "team": "Fulham",
+        "player": "Josh King",
+        "card": "Y"
+      },
+      {
+        "time": "50'00",
+        "team": "Fulham",
+        "player": "Timothy Castagne",
+        "card": "Y"
+      },
+      {
+        "time": "85'00",
+        "team": "Fulham",
+        "player": "Rodrigo Muniz",
+        "card": "Y"
+      }
+    ]
+  },
+  {
+    "gameweek": 6,
+    "kickoff": "Sat 10 Oct 2026, 17:30 BST",
+    "status": "C",
+    "home": {
+      "team": "Man Utd",
+      "score": 1
+    },
+    "away": {
+      "team": "Spurs",
+      "score": 1
+    },
+    "goals": [
+      {
+        "time": "73'00",
+        "team": "Man Utd",
+        "player": "Bryan Mbeumo",
+        "type": "G"
+      },
+      {
+        "time": "90+2'00",
+        "team": "Spurs",
+        "player": "Dominic Solanke",
+        "type": "G"
+      }
+    ],
+    "cards": [
+      {
+        "time": "04'00",
+        "team": "Spurs",
+        "player": "Conor Gallagher",
+        "card": "Y"
+      },
+      {
+        "time": "78'00",
+        "team": "Spurs",
+        "player": "Rodrigo Bentancur",
+        "card": "R"
+      },
+      {
+        "time": "78'00",
+        "team": "Spurs",
+        "player": "Jan Paul van Hecke",
+        "card": "Y"
+      },
+      {
+        "time": "78'00",
+        "team": "Man Utd",
+        "player": "Luke Shaw",
+        "card": "Y"
+      },
+      {
+        "time": "84'00",
+        "team": "Man Utd",
+        "player": "Bruno Fernandes",
+        "card": "Y"
+      },
+      {
+        "time": "87'00",
+        "team": "Man Utd",
+        "player": "Lisandro Martínez",
+        "card": "Y"
+      },
+      {
+        "time": "90+6'00",
+        "team": "Man Utd",
+        "player": "Diogo Dalot",
+        "card": "Y"
+      },
+      {
+        "time": "90+8'00",
+        "team": "Spurs",
+        "player": "Archie Gray",
+        "card": "Y"
+      }
+    ]
+  },
+  {
+    "gameweek": 7,
+    "kickoff": "Sun 18 Oct 2026, 14:00 BST",
+    "status": "C",
+    "home": {
+      "team": "Leeds",
+      "score": 1
+    },
+    "away": {
+      "team": "Man Utd",
+      "score": 1
+    },
+    "goals": [
+      {
+        "time": "35'00",
+        "team": "Man Utd",
+        "player": "Bryan Mbeumo",
+        "type": "G"
+      },
+      {
+        "time": "51'00",
+        "team": "Leeds",
+        "player": "Dominic Calvert-Lewin",
+        "type": "G"
+      }
+    ],
+    "cards": [
+      {
+        "time": "17'00",
+        "team": "Man Utd",
+        "player": "Bruno Fernandes",
+        "card": "Y"
+      },
+      {
+        "time": "19'00",
+        "team": "Leeds",
+        "player": "Gabriel Gudmundsson",
+        "card": "Y"
+      },
+      {
+        "time": "90+2'00",
+        "team": "Man Utd",
+        "player": "Andrey Santos",
+        "card": "Y"
+      },
+      {
+        "time": "90+2'00",
+        "team": "Leeds",
+        "player": "Ethan Ampadu",
+        "card": "Y"
+      }
+    ]
+  },
+  {
+    "gameweek": 8,
+    "kickoff": "Sun 25 Oct 2026, 14:00 GMT",
+    "status": "U",
+    "home": {
+      "team": "Man Utd",
+      "score": null
+    },
+    "away": {
+      "team": "Bournemouth",
+      "score": null
+    },
+    "goals": [],
+    "cards": []
+  },
+  {
+    "gameweek": 9,
+    "kickoff": "Sat 31 Oct 2026, 12:30 GMT",
+    "status": "U",
+    "home": {
+      "team": "Chelsea",
+      "score": null
+    },
+    "away": {
+      "team": "Man Utd",
+      "score": null
+    },
+    "goals": [],
+    "cards": []
+  },
+  {
+    "gameweek": 10,
+    "kickoff": "Sun 8 Nov 2026, 16:30 GMT",
+    "status": "U",
+    "home": {
+      "team": "Man Utd",
+      "score": null
+    },
+    "away": {
+      "team": "Aston Villa",
+      "score": null
+    },
+    "goals": [],
+    "cards": []
+  }
+]

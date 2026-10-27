@@ -1,0 +1,61 @@
+.dashboard {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.match-card{
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    max-width: 480px;
+    text-align: left;
+}
+
+.match-card.result-W { border-left: 6px solid #2e9e5b; }
+.match-card.result-D { border-left: 6px solid #9a9a9a; }
+.match-card.result-L { border-left: 6px solid #d64545; }
+
+.match-card .kickoff{
+    color: #888;
+    font-size: 14px;
+}
+
+.match-card ul{
+    padding-left: 20px;
+}
+
+.summary {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+}
+.stat {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px 0;
+    text-align: center;
+}
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+}
+.stat-label {
+    color: #888;
+    font-size: 14px;
+}
+.match-card.upcoming {
+    border-style: dashed;
+  }
+
+.match-count {
+    color: black;
+    font-size: 25px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+.error {
+      color: #d64545;
+  }

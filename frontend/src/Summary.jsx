@@ -1,29 +1,30 @@
-const TEAM = 'Man Utd'
+import { getResult } from './matchUtils.js'
 
 function Summary({ matches }) {
     let win = 0, draw = 0, loss = 0, goalsFor = 0, goalsAgainst = 0
 
     for (const m of matches) {
-        const isHome = m.home.team === TEAM
-        const us = isHome ? m.home.score : m.away.score
-        const them = isHome ? m.away.score : m.home.score
+        
+        const {us, them, result} = getResult(m)
 
-        goalsFor += us
-        goalsAgainst += them
-        if (us > them) win++
-        else if (us === them) draw++
+        goalsFor += us.score
+        goalsAgainst += them.score
+        if (result==="W") win++
+        else if (result==="D") draw++
         else loss++
     }
 
     const stats = [
-        { label: '勝', value: win },
-        { label: '和', value: draw },
-        { label: '負', value: loss },
-        { label: '進球', value: goalsFor },
-        { label: '失球', value: goalsAgainst }
+        { label: 'Win', value: win },
+        { label: 'Draw', value: draw },
+        { label: 'Loss', value: loss },
+        { label: 'Goals', value: goalsFor },
+        { label: 'Conceded', value: goalsAgainst }
     ]
 
     return (
+    <div>
+    <div className="match-count">Currently {matches.length} matches</div>
     <div className="summary">
         {stats.map((s) => (
         <div key={s.label} className="stat">
@@ -31,6 +32,7 @@ function Summary({ matches }) {
             <div className="stat-label">{s.label}</div>
         </div>
         ))}
+    </div>
     </div>
     )
 }
