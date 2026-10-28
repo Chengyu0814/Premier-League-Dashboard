@@ -1,11 +1,11 @@
 import { getResult } from './matchUtils.js'
 
-function Summary({ matches }) {
+function Summary({ matches,team }) {
     let win = 0, draw = 0, loss = 0, goalsFor = 0, goalsAgainst = 0
 
     for (const m of matches) {
         
-        const {us, them, result} = getResult(m)
+        const {us, them, result} = getResult(m,team)
 
         goalsFor += us.score
         goalsAgainst += them.score

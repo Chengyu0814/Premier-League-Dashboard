@@ -1,82 +1,5 @@
 [
   {
-    "gameweek": 3,
-    "kickoff": "Sun 6 Sep 2026, 14:00 BST",
-    "status": "C",
-    "home": {
-      "team": "Everton",
-      "score": 2
-    },
-    "away": {
-      "team": "Man Utd",
-      "score": 2
-    },
-    "goals": [
-      {
-        "time": "46'00",
-        "team": "Man Utd",
-        "player": "Bryan Mbeumo",
-        "type": "G"
-      },
-      {
-        "time": "83'00",
-        "team": "Everton",
-        "player": "Tyrique George",
-        "type": "G"
-      },
-      {
-        "time": "88'00",
-        "team": "Man Utd",
-        "player": "Benjamin Sesko",
-        "type": "G"
-      },
-      {
-        "time": "90+6'00",
-        "team": "Everton",
-        "player": "Ainsley Maitland-Niles",
-        "type": "G"
-      }
-    ],
-    "cards": [
-      {
-        "time": "13'00",
-        "team": "Everton",
-        "player": "Harrison Armstrong",
-        "card": "Y"
-      },
-      {
-        "time": "34'00",
-        "team": "Everton",
-        "player": "Brennan Johnson",
-        "card": "Y"
-      },
-      {
-        "time": "62'00",
-        "team": "Man Utd",
-        "player": "Luke Shaw",
-        "card": "Y"
-      },
-      {
-        "time": "64'00",
-        "team": "Everton",
-        "player": "Merlin Röhl",
-        "card": "Y"
-      },
-      {
-        "time": "79'00",
-        "team": "Man Utd",
-        "player": "Harry Maguire",
-        "card": "Y"
-      },
-      {
-        "time": "81'00",
-        "team": "Man Utd",
-        "player": "Diogo Dalot",
-        "card": "Y"
-      }
-    ]
-  },
-  {
     "gameweek": 4,
     "kickoff": "Sun 13 Sep 2026, 16:30 BST",
     "status": "C",
@@ -303,17 +226,67 @@
   {
     "gameweek": 8,
     "kickoff": "Sun 25 Oct 2026, 14:00 GMT",
-    "status": "U",
+    "status": "C",
     "home": {
       "team": "Man Utd",
-      "score": null
+      "score": 0
     },
     "away": {
       "team": "Bournemouth",
-      "score": null
+      "score": 3
     },
-    "goals": [],
-    "cards": []
+    "goals": [
+      {
+        "time": "38'00",
+        "team": "Bournemouth",
+        "player": "Rayan",
+        "type": "G"
+      },
+      {
+        "time": "43'00",
+        "team": "Bournemouth",
+        "player": "Marcus Tavernier",
+        "type": "G"
+      },
+      {
+        "time": "71'00",
+        "team": "Bournemouth",
+        "player": "Evanilson",
+        "type": "G"
+      }
+    ],
+    "cards": [
+      {
+        "time": "22'00",
+        "team": "Man Utd",
+        "player": "Andrey Santos",
+        "card": "Y"
+      },
+      {
+        "time": "27'00",
+        "team": "Bournemouth",
+        "player": "Tyler Adams",
+        "card": "Y"
+      },
+      {
+        "time": "37'00",
+        "team": "Man Utd",
+        "player": "Ayden Heaven",
+        "card": "Y"
+      },
+      {
+        "time": "40'00",
+        "team": "Man Utd",
+        "player": "Youri Tielemans",
+        "card": "Y"
+      },
+      {
+        "time": "45+3'00",
+        "team": "Man Utd",
+        "player": "Harry Maguire",
+        "card": "Y"
+      }
+    ]
   },
   {
     "gameweek": 9,
@@ -340,6 +313,21 @@
     },
     "away": {
       "team": "Aston Villa",
+      "score": null
+    },
+    "goals": [],
+    "cards": []
+  },
+  {
+    "gameweek": 11,
+    "kickoff": "Sun 22 Nov 2026, 16:30 GMT",
+    "status": "U",
+    "home": {
+      "team": "Liverpool",
+      "score": null
+    },
+    "away": {
+      "team": "Man Utd",
       "score": null
     },
     "goals": [],

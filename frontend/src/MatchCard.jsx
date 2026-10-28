@@ -2,9 +2,9 @@ import { getSides, getResult } from './matchUtils.js'
 
 const CARD_LABEL = { Y: '🟨', R: '🟥', YR: '🟨🟥' }
 
-function MatchCard({ match }) {
+function MatchCard({ match,team }) {
   const { gameweek, kickoff, status, goals, cards } = match
-  const { isHome, us, them } = getSides(match)
+  const { isHome, us, them } = getSides(match,team)
   const venue = isHome ? 'Home' : 'Away'
 
   if (status !== 'C') {
@@ -15,7 +15,7 @@ function MatchCard({ match }) {
     </div>
   )
   }
-  const { result } = getResult(match)
+  const { result } = getResult(match,team)
   return (
   <div className={`match-card result-${result}`}>
     <p className="kickoff">Matchweek{gameweek}·{venue}·{kickoff}</p>

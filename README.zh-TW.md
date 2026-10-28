@@ -2,24 +2,26 @@
 
 [English](README.md) | **繁體中文**
 
-2026/27 賽季英超儀表板。目前先以 **Manchester United** 為主，顯示最近 5 場已完賽和接下來 3 場比賽。
+2026/27 賽季英超儀表板。可以選擇 20 支英超球隊中的任何一隊，查看最近 5 場已完賽和接下來 3 場比賽。
 
-這是一個學習用的專案：後端用 Python 從英超官網的 Pulse API 抓資料，前端用 React 做成 dashboard。
+這是一個學習用的專案：後端是 FastAPI 伺服器，從英超官網的 Pulse API 抓即時資料；前端用 React 做成 dashboard。
 
 ## 功能
 
+- **選擇球隊**：可以切換 20 支英超球隊（預設是 Man Utd）
 - **戰績總覽**：最近 5 場的勝 / 和 / 負、進球、失球
 - **已完賽**：比分、進球（時間、球員、烏龍球 / 點球）、紅黃牌
 - **即將進行**：接下來 3 場的對手和開賽時間
-- 曼聯固定顯示在左邊，並標示主場 / 客場
+- 選擇的球隊固定顯示在左邊，並標示 Home / Away
 - 卡片左側依勝（綠）/ 和（灰）/ 負（紅）上色
 - 載入中與讀取失敗的提示畫面
+- 每次請求都即時抓資料，資料永遠是最新的
 
 ## 技術
 
 | 部分 | 使用 |
 |---|---|
-| 後端 | Python 3（只用標準函式庫：`urllib`、`json`、`datetime`） |
+| 後端 | Python 3 + FastAPI |
 | 資料來源 | Premier League Pulse API（`footballapi.pulselive.com`） |
 | 前端 | React 19 + Vite |
 
@@ -28,13 +30,12 @@
 ```
 Eurpoe-football/
 ├── backend/
-│   └── premier_league.py        # 抓 Pulse API，整理後輸出 JSON
+│   ├── main.py                  # FastAPI：/api/teams、/api/matches
+│   └── premier_league.py        # 抓 Pulse API，整理成比賽摘要
 └── frontend/
-    ├── public/
-    │   └── man_utd_summary.json # 後端產生，前端讀取的資料
     └── src/
         ├── App.jsx
-        ├── PremierLeague.jsx    # 主頁面：fetch 資料、分成已完賽 / 即將進行
+        ├── PremierLeague.jsx    # 主頁面：選擇球隊、fetch 資料、分成已完賽 / 即將進行
         ├── Summary.jsx          # 戰績總覽
         ├── MatchCard.jsx        # 單場比賽卡片
         ├── matchUtils.js        # 共用函式：判斷主客場、勝負
@@ -44,20 +45,24 @@ Eurpoe-football/
 ## 資料流程
 
 ```
-Pulse API ──> backend/premier_league.py ──> frontend/public/man_utd_summary.json ──> React (fetch)
+Pulse API ──> 後端（FastAPI，:8000）──> 前端（React，:5173）
 ```
 
-目前還沒有 API server。Python 跑完會把 JSON 寫進 `frontend/public/`，React 再用 `fetch` 讀這個檔案。
+選擇球隊後，React 會呼叫 `/api/matches?team=...`，後端再去 Pulse API 抓這支球隊的賽程和比賽細節，整理成 JSON 回傳。
 
 ## 如何執行
 
-需要 **Python 3** 和 **Node.js 18 以上**。
+需要 **Python 3** 和 **Node.js 18 以上**。要開兩個終端機，一個跑後端、一個跑前端。
 
-**1. 產生資料**（要在專案根目錄執行，因為輸出路徑是相對路徑）
+**1. 啟動後端**
 
 ```bash
-python3 backend/premier_league.py
+pip3 install "fastapi[standard]"
+cd backend
+fastapi dev main.py
 ```
+
+API 會在 http://localhost:8000 執行。要在 `backend/` 裡面執行，`main.py` 才 import 得到 `premier_league.py`。
 
 **2. 啟動前端**
 
@@ -69,9 +74,16 @@ npm run dev
 
 打開終端機顯示的網址（通常是 http://localhost:5173 ）。
 
-> 重新跑 Python 更新 JSON 之後，瀏覽器要按 **Cmd + Shift + R** 強制重新整理，才會讀到新的資料。
+## API
 
-## JSON 資料格式
+| 網址 | 說明 |
+|---|---|
+| `GET /api/teams` | 20 支球隊的名稱，依字母排序 |
+| `GET /api/matches?team=Arsenal` | 該球隊最近 5 場已完賽 + 接下來 3 場。`team` 預設是 `Man Utd`，找不到球隊時回傳 404 |
+
+互動式 API 文件：http://localhost:8000/docs
+
+### 比賽資料格式
 
 ```json
 {
@@ -91,8 +103,8 @@ npm run dev
 
 ## 接下來的計畫
 
-- [ ] 後端改成 FastAPI，前端改成呼叫 API
-- [ ] 可以選擇球隊，不只看曼聯
+- [x] 後端改成 FastAPI，前端改成呼叫 API
+- [x] 可以選擇球隊，不只看曼聯
 - [ ] 美化排版
 
 ## 備註

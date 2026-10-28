@@ -1,14 +1,12 @@
-export const TEAM = 'Man Utd'
-
-export function getSides(match) {
-    const isHome = match.home.team === TEAM
+export function getSides(match,team) {
+    const isHome = match.home.team === team
     const us = isHome ? match.home : match.away
     const them = isHome ? match.away : match.home
     return { isHome, us, them }
 }
 
-export function getResult(match) {
-    const { us, them } = getSides(match)
+export function getResult(match,team) {
+    const { us, them } = getSides(match,team)
 
     let result = 'D'
     if (us.score > them.score) result = 'W'
