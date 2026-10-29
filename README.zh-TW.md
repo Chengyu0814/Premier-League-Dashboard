@@ -12,8 +12,12 @@
 - **戰績總覽**：最近 5 場的勝 / 和 / 負、進球、失球
 - **已完賽**：比分、進球（時間、球員、烏龍球 / 點球）、紅黃牌
 - **即將進行**：接下來 3 場的對手和開賽時間
+- 開賽時間以台灣時間（UTC+8）顯示
 - 選擇的球隊固定顯示在左邊，並標示 Home / Away
+- 進球和紅黃牌對齊各自的球隊：選擇的球隊靠左、對手靠右，烏龍球和點球有 OG / P 標籤
 - 卡片左側依勝（綠）/ 和（灰）/ 負（紅）上色
+- **淺色 / 深色主題切換**：第一次打開時跟著系統設定，之後會記住你的選擇
+- 響應式排版：寬螢幕時卡片排成兩欄，手機上自動變成一欄
 - 載入中與讀取失敗的提示畫面
 - 每次請求都即時抓資料，資料永遠是最新的
 
@@ -38,7 +42,8 @@ Eurpoe-football/
         ├── PremierLeague.jsx    # 主頁面：選擇球隊、fetch 資料、分成已完賽 / 即將進行
         ├── Summary.jsx          # 戰績總覽
         ├── MatchCard.jsx        # 單場比賽卡片
-        ├── matchUtils.js        # 共用函式：判斷主客場、勝負
+        ├── ThemeToggle.jsx      # 淺色 / 深色主題按鈕
+        ├── matchUtils.js        # 共用函式：判斷主客場、勝負、時間格式
         └── index.css
 ```
 
@@ -89,6 +94,7 @@ npm run dev
 {
   "gameweek": 4,
   "kickoff": "Sun 13 Sep 2026, 16:30 BST",
+  "kickoff_ms": 1789313400000,
   "status": "C",
   "home": { "team": "Man Utd", "score": 0 },
   "away": { "team": "Man City", "score": 1 },
@@ -97,6 +103,7 @@ npm run dev
 }
 ```
 
+- `kickoff` 是 Pulse 提供的英國時間文字；`kickoff_ms` 是毫秒的 Unix timestamp，前端用它轉成台灣時間
 - `status`：`C` 已完賽、`U` 未開始。未完賽的 `score` 是 `null`
 - `goals.type`：`G` 一般進球、`O` 烏龍球、`P` 點球
 - `cards.card`：`Y` 黃牌、`R` 紅牌、`YR` 兩黃變一紅
@@ -105,7 +112,8 @@ npm run dev
 
 - [x] 後端改成 FastAPI，前端改成呼叫 API
 - [x] 可以選擇球隊，不只看曼聯
-- [ ] 美化排版
+- [x] 美化排版
+- [x] 淺色 / 深色主題切換
 
 ## 備註
 

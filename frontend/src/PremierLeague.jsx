@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import MatchCard from './MatchCard.jsx'
 import Summary from './Summary.jsx'
+import ThemeToggle from './ThemeToggle.jsx'
 
 const API = 'http://localhost:8000'
 
@@ -42,28 +43,38 @@ function PremierLeague() {
   const upcoming = matches.filter((m) => m.status === 'U')
   
   return (
-    <div className="dashboard"> 
-      <h1>{team} Dashboard</h1>
-      <select value={team} onChange={handleTeamChange}>
-        {teams.map((t) => (
-          <option key={t} value={t}>{t}</option>
-        ))}
-      </select>
-      {loading && <p>載入中…</p>}
-      {error && <p className="error">讀取資料失敗：{error}</p>}
-
-      {!loading && !error && (
-      <div>
-        <Summary matches={finished} team = {team}/>
-        <h2>Finished</h2>
+    <div className="dashboard">
+    <div className="header"> 
+      <h1>{team}</h1>
+      <div className="header-controls">
+        <div className="select-wrap">
+          <select value={team} onChange={handleTeamChange}>
+            {teams.map((t) => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
+        </div>
+        <ThemeToggle />
+      </div>
+    </div>
+    {loading && <p>載入中…</p>}
+    {error && <p className="error">讀取資料失敗：{error}</p>}
+    {!loading && !error && (
+    <div>
+      <Summary matches={finished} team = {team}/>
+      <h2 className="section-title">Finished</h2>
+      <div className="match-list">
         {finished.map(
           (m) =>(<MatchCard key={m.gameweek} match={m} team={team}/>)
-        )}  
-        <h2>Upcoming</h2>
-        {upcoming.map((m) => <MatchCard key={m.gameweek} match={m} team={team}/>)}  
+        )}
       </div>
-    )}
+      <h2 className="section-title">Upcoming</h2>
+      <div className="match-list">
+        {upcoming.map((m) => <MatchCard key={m.gameweek} match={m} team={team}/>)}
+      </div>
     </div>
+    )}
+   </div> 
   )
 }
 

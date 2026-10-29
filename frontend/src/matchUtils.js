@@ -14,3 +14,19 @@ export function getResult(match,team) {
 
     return { us, them, result }
 }
+
+export function formatKickoff(ms) {
+      return new Date(ms).toLocaleString('zh-TW', {
+          timeZone: 'Asia/Taipei',
+          month: 'numeric',
+          day: 'numeric',
+          weekday: 'short',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+      })
+}
+
+export function formatMinute(time) {
+      return time.replace("'00", "'")
+}

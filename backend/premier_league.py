@@ -26,6 +26,7 @@ def build_summary(team_name):
         summary.append({
             "gameweek": int(match["gameweek"]["gameweek"]),
             "kickoff": match["kickoff"]["label"],
+            "kickoff_ms": int(match["kickoff"]["millis"]),
             "status" : match["status"],
             "home": {"team": names["home"], "score": int(home["score"]) if finished else None},
             "away": {"team": names["away"], "score": int(away["score"]) if finished else None},

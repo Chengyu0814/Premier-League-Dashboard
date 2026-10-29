@@ -1,61 +1,245 @@
+:root{
+    color-scheme: light;
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #3d195b;
+    --win: #2e9e5b;
+    --draw: #9a9a9a;
+    --loss: #d64545;
+
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: var(--text);
+}
+
+:root[data-theme='dark'] {
+color-scheme: dark;
+--bg: #111318;
+--card: #1c1f26;
+--text: #e8e8e8;
+--muted: #9ca3af;
+--border: #2d313a;
+--accent: #c9a6ff;
+}
+
+* {
+      box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: var(--bg);
+}
+
 .dashboard {
-    max-width: 480px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 24px 16px;
 }
 
-.match-card{
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 16px 0;
-    max-width: 480px;
-    text-align: left;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
 }
 
-.match-card.result-W { border-left: 6px solid #2e9e5b; }
-.match-card.result-D { border-left: 6px solid #9a9a9a; }
-.match-card.result-L { border-left: 6px solid #d64545; }
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: var(--accent);
+}
 
-.match-card .kickoff{
-    color: #888;
+.section-title {
+    font-size: 18px;
+    color: var(--muted);
+    margin: 32px 0 12px;
+}
+
+/* 戰績總覽 */
+.match-count {
+    color: var(--muted);
     font-size: 14px;
-}
-
-.match-card ul{
-    padding-left: 20px;
+    margin-bottom: 8px;
 }
 
 .summary {
     display: flex;
     gap: 12px;
-    max-width: 480px;
 }
+
 .stat {
     flex: 1;
-    border: 1px solid #ddd;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 12px 0;
+    padding: 16px 0;
     text-align: center;
 }
+
 .stat-value {
     font-size: 28px;
     font-weight: bold;
 }
+
 .stat-label {
-    color: #888;
+    color: var(--muted);
     font-size: 14px;
 }
-.match-card.upcoming {
-    border-style: dashed;
-  }
 
-.match-count {
-    color: black;
-    font-size: 25px;
-    margin-bottom: 8px;
-    text-align: left;
+.match-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
 }
+
+.match-card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+}
+
+.match-card.result-W { border-left: 6px solid var(--win); }
+.match-card.result-D { border-left: 6px solid var(--draw); }
+.match-card.result-L { border-left: 6px solid var(--loss); }
+.match-card.upcoming { border-style: dashed; }
+
+
+
+.scoreline {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+.scoreline .team {
+    font-weight: 600;
+}
+
+.scoreline .them {
+    text-align: right;
+}
+
+.scoreline .score {
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .error {
-  color: #d64545;
+  color: var(--loss);
+}
+
+/* 選單 */
+.select-wrap {
+    position: relative;
+}
+
+.select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--muted);
+}
+
+.header select {
+    appearance: none;
+    min-width: 220px;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 40px 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.header select:hover {
+    border-color: var(--accent);
+}
+
+.header select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* 卡片上方：輪次與時間 */
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+.venue {
+    margin-left: 6px;
+    padding: 1px 8px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 11px;
+}
+
+/* 進球與紅黃牌 */
+.events {
+    list-style: none;
+    margin: 12px 0 0;
+    border-top: 1px solid var(--border);
+    padding: 8px 0 0;
+} 
+.event {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 0;
+    font-size: 14px;
+}
+.event.them {
+    flex-direction: row-reverse;
+}
+.minute {
+    min-width: 40px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+.event.them .minute {
+    text-align: right;
+} 
+.tag {
+    padding: 1px 6px;
+    border-radius: 6px;
+    background: var(--border);
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* 標題列右邊：選單 + 主題按鈕 */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--card);
+    cursor: pointer;
+}
+.theme-toggle:hover {
+    border-color: var(--accent);
+}
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
