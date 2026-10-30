@@ -6,6 +6,8 @@ A Premier League dashboard for the 2026/27 season. Pick any of the 20 clubs to s
 
 This is a learning project: the backend is a FastAPI server that fetches live data from the Premier League's Pulse API, and the frontend is a React dashboard.
 
+![Dashboard screenshot](docs/screenshot-en.png)
+
 ## Features
 
 - **Team selector**: switch between all 20 Premier League clubs (default: Man Utd)

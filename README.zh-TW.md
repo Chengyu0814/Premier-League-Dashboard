@@ -6,6 +6,8 @@
 
 這是一個學習用的專案：後端是 FastAPI 伺服器，從英超官網的 Pulse API 抓即時資料；前端用 React 做成 dashboard。
 
+![Dashboard 截圖](docs/screenshot-zh.png)
+
 ## 功能
 
 - **選擇球隊**：可以切換 20 支英超球隊（預設是 Man Utd）

@@ -7,7 +7,7 @@ export const TEXT = {
     loadError: 'Failed to load:',
     finished: 'Finished',
     upcoming: 'Upcoming',
-    matchCount: (n) => `Currently ${n} matches`,
+    matchCount: (n) => `Last ${n} matches`,
     win: 'Win',
     draw: 'Draw',
     loss: 'Loss',
