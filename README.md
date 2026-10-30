@@ -9,6 +9,7 @@ This is a learning project: the backend is a FastAPI server that fetches live da
 ## Features
 
 - **Team selector**: switch between all 20 Premier League clubs (default: Man Utd)
+- **English / Traditional Chinese**: `/` is the English page, `/zh` is the Traditional Chinese page, with an EN | 中文 switch in the header. Labels, dates and club names are translated (player names stay in English)
 - **Form summary**: wins / draws / losses, goals for and against over the last 5 matches
 - **Finished matches**: score, goals (time, scorer, own goal / penalty), yellow and red cards
 - **Upcoming matches**: opponent and kickoff time for the next 3 matches
@@ -27,7 +28,7 @@ This is a learning project: the backend is a FastAPI server that fetches live da
 |---|---|
 | Backend | Python 3 + FastAPI |
 | Data source | Premier League Pulse API (`footballapi.pulselive.com`) |
-| Frontend | React 19 + Vite |
+| Frontend | React 19 + Vite + React Router |
 
 ## Project Structure
 
@@ -38,11 +39,14 @@ Eurpoe-football/
 │   └── premier_league.py        # Fetches the Pulse API and builds the match summary
 └── frontend/
     └── src/
-        ├── App.jsx
+        ├── main.jsx             # Entry point, wraps the app in BrowserRouter
+        ├── App.jsx              # Routes: / (English), /zh (Chinese), 404
         ├── PremierLeague.jsx    # Main page: team selector, fetches data, splits finished / upcoming
         ├── Summary.jsx          # Form summary
         ├── MatchCard.jsx        # Single match card
         ├── ThemeToggle.jsx      # Light / dark theme button
+        ├── LanguageSwitch.jsx   # EN | 中文 links
+        ├── i18n.js              # Translation dictionary, club names, LanguageContext and useLang()
         ├── matchUtils.js        # Shared helpers: home/away side, match result, time formatting
         └── index.css
 ```
@@ -77,7 +81,7 @@ npm install
 npm run dev
 ```
 
-Open the URL shown in the terminal (usually http://localhost:5173 ).
+Open the URL shown in the terminal (usually http://localhost:5173 ). The Traditional Chinese page is at http://localhost:5173/zh .
 
 ## API
 
@@ -103,7 +107,7 @@ Interactive API docs are available at http://localhost:8000/docs .
 }
 ```
 
-- `kickoff` is the UK-time label from Pulse; `kickoff_ms` is a Unix timestamp in milliseconds, which the frontend converts to Taiwan time
+- `kickoff` is the UK-time label from Pulse; `kickoff_ms` is a Unix timestamp in milliseconds, which the frontend converts to Taiwan time in the current language
 - `status`: `C` completed, `U` upcoming. `score` is `null` for upcoming matches
 - `goals.type`: `G` goal, `O` own goal, `P` penalty
 - `cards.card`: `Y` yellow, `R` red, `YR` second yellow (red)
@@ -114,6 +118,7 @@ Interactive API docs are available at http://localhost:8000/docs .
 - [x] Team selector, not just Man Utd
 - [x] Improve the layout and styling
 - [x] Light / dark theme toggle
+- [x] Traditional Chinese page
 
 ## Notes
 

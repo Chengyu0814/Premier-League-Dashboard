@@ -1,6 +1,8 @@
 import { getResult } from './matchUtils.js'
+import { useLang } from './i18n.js'
 
 function Summary({ matches,team }) {
+    const { t } = useLang()
     let win = 0, draw = 0, loss = 0, goalsFor = 0, goalsAgainst = 0
 
     for (const m of matches) {
@@ -15,16 +17,16 @@ function Summary({ matches,team }) {
     }
 
     const stats = [
-        { label: 'Win', value: win },
-        { label: 'Draw', value: draw },
-        { label: 'Loss', value: loss },
-        { label: 'Goals', value: goalsFor },
-        { label: 'Conceded', value: goalsAgainst }
+        { label: t.win, value: win },
+        { label: t.draw, value: draw },
+        { label: t.loss, value: loss },
+        { label: t.goals, value: goalsFor },
+        { label: t.conceded, value: goalsAgainst }
     ]
 
     return (
     <div>
-    <div className="match-count">Currently {matches.length} matches</div>
+    <div className="match-count">{t.matchCount(matches.length)}</div>
     <div className="summary">
         {stats.map((s) => (
         <div key={s.label} className="stat">

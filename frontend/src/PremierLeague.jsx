@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import MatchCard from './MatchCard.jsx'
 import Summary from './Summary.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
+import LanguageSwitch from './LanguageSwitch.jsx'
+import { TEXT, LanguageContext, translateTeam } from './i18n.js'
 
 const API = 'http://localhost:8000'
 
-function PremierLeague() {
+function PremierLeague({ lang }) {
+  const t = TEXT[lang]
   const [teams,setTeams] = useState([])
   const [team,setTeam] = useState("Man Utd")
   const [matches, setMatches] = useState([])
@@ -33,6 +36,11 @@ function PremierLeague() {
         ignore = true
       }
     }, [team])
+  
+  useEffect(() => {
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hant-TW' : 'en'
+    document.title = t.pageTitle
+  }, [lang, t])
 
   function handleTeamChange(e) {
     setTeam(e.target.value)
@@ -43,38 +51,41 @@ function PremierLeague() {
   const upcoming = matches.filter((m) => m.status === 'U')
   
   return (
-    <div className="dashboard">
+  <LanguageContext value={lang}>
+  <div className="dashboard">
     <div className="header"> 
-      <h1>{team}</h1>
+      <h1>{translateTeam(team, lang)}</h1>
       <div className="header-controls">
+        <LanguageSwitch />
         <div className="select-wrap">
           <select value={team} onChange={handleTeamChange}>
-            {teams.map((t) => (
-              <option key={t} value={t}>{t}</option>
+            {teams.map((name) => (
+              <option key={name} value={name}>{translateTeam(name, lang)}</option>
             ))}
           </select>
         </div>
         <ThemeToggle />
       </div>
     </div>
-    {loading && <p>載入中…</p>}
-    {error && <p className="error">讀取資料失敗：{error}</p>}
+    {loading && <p>{t.loading}</p>}
+    {error && <p className="error">{t.loadError} {error}</p>}
     {!loading && !error && (
     <div>
       <Summary matches={finished} team = {team}/>
-      <h2 className="section-title">Finished</h2>
+      <h2 className="section-title">{t.finished}</h2>
       <div className="match-list">
         {finished.map(
           (m) =>(<MatchCard key={m.gameweek} match={m} team={team}/>)
         )}
       </div>
-      <h2 className="section-title">Upcoming</h2>
+      <h2 className="section-title">{t.upcoming}</h2>
       <div className="match-list">
         {upcoming.map((m) => <MatchCard key={m.gameweek} match={m} team={team}/>)}
       </div>
     </div>
     )}
-   </div> 
+  </div> 
+  </LanguageContext>
   )
 }
 

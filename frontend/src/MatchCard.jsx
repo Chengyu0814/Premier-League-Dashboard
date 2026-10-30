@@ -1,9 +1,11 @@
 import { getSides, getResult, formatKickoff, formatMinute } from './matchUtils.js' 
+import { useLang } from './i18n.js'
 
 const CARD_LABEL = { Y: '🟨', R: '🟥', YR: '🟨🟥' }
 const GOAL_TAG = { O: 'OG', P: 'P' }
 
 function MatchCard({ match,team }) {
+  const { lang, t ,teamName} = useLang()
   const { gameweek, kickoff_ms, status, goals, cards } = match
   const { isHome, us, them } = getSides(match,team)
   const finished = status === 'C'
@@ -15,16 +17,16 @@ function MatchCard({ match,team }) {
     <div className={className}>
       <div className="card-top">
         <span>
-          Matchweek {gameweek}
-          <span className="venue">{isHome ? 'Home' : 'Away'}</span>
+          {t.matchweek(gameweek)}
+          <span className="venue">{isHome ? t.home : t.away}</span>
         </span>
-        <span>{formatKickoff(kickoff_ms)}</span>
+        <span>{formatKickoff(kickoff_ms, lang)}</span>
       </div>
 
       <div className="scoreline">
-        <span className="team">{us.team}</span>
+        <span className="team">{teamName(us.team)}</span>
         <span className="score">{finished ? `${us.score} - ${them.score}` : 'vs'}</span>
-        <span className="team them">{them.team}</span>
+        <span className="team them">{teamName(them.team)}</span>
       </div>
 
       {goals.length > 0 && (

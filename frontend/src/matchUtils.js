@@ -15,8 +15,8 @@ export function getResult(match,team) {
     return { us, them, result }
 }
 
-export function formatKickoff(ms) {
-      return new Date(ms).toLocaleString('zh-TW', {
+export function formatKickoff(ms,lang) {
+    return new Date(ms).toLocaleString(lang === 'zh' ? 'zh-TW' : 'en-US', {
           timeZone: 'Asia/Taipei',
           month: 'numeric',
           day: 'numeric',

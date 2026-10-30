@@ -9,6 +9,7 @@
 ## 功能
 
 - **選擇球隊**：可以切換 20 支英超球隊（預設是 Man Utd）
+- **英文 / 繁體中文**：`/` 是英文版、`/zh` 是繁體中文版，標題列有 EN | 中文 切換。介面文字、日期和球隊名稱都會翻譯（球員名字維持英文）
 - **戰績總覽**：最近 5 場的勝 / 和 / 負、進球、失球
 - **已完賽**：比分、進球（時間、球員、烏龍球 / 點球）、紅黃牌
 - **即將進行**：接下來 3 場的對手和開賽時間
@@ -27,7 +28,7 @@
 |---|---|
 | 後端 | Python 3 + FastAPI |
 | 資料來源 | Premier League Pulse API（`footballapi.pulselive.com`） |
-| 前端 | React 19 + Vite |
+| 前端 | React 19 + Vite + React Router |
 
 ## 專案結構
 
@@ -38,11 +39,14 @@ Eurpoe-football/
 │   └── premier_league.py        # 抓 Pulse API，整理成比賽摘要
 └── frontend/
     └── src/
-        ├── App.jsx
+        ├── main.jsx             # 進入點，用 BrowserRouter 包住整個 App
+        ├── App.jsx              # 路由：/（英文）、/zh（中文）、404
         ├── PremierLeague.jsx    # 主頁面：選擇球隊、fetch 資料、分成已完賽 / 即將進行
         ├── Summary.jsx          # 戰績總覽
         ├── MatchCard.jsx        # 單場比賽卡片
         ├── ThemeToggle.jsx      # 淺色 / 深色主題按鈕
+        ├── LanguageSwitch.jsx   # EN | 中文 切換連結
+        ├── i18n.js              # 翻譯字典、球隊中文名、LanguageContext 和 useLang()
         ├── matchUtils.js        # 共用函式：判斷主客場、勝負、時間格式
         └── index.css
 ```
@@ -77,7 +81,7 @@ npm install
 npm run dev
 ```
 
-打開終端機顯示的網址（通常是 http://localhost:5173 ）。
+打開終端機顯示的網址（通常是 http://localhost:5173 ）。繁體中文版在 http://localhost:5173/zh 。
 
 ## API
 
@@ -103,7 +107,7 @@ npm run dev
 }
 ```
 
-- `kickoff` 是 Pulse 提供的英國時間文字；`kickoff_ms` 是毫秒的 Unix timestamp，前端用它轉成台灣時間
+- `kickoff` 是 Pulse 提供的英國時間文字；`kickoff_ms` 是毫秒的 Unix timestamp，前端用它轉成台灣時間，並依照目前的語言顯示
 - `status`：`C` 已完賽、`U` 未開始。未完賽的 `score` 是 `null`
 - `goals.type`：`G` 一般進球、`O` 烏龍球、`P` 點球
 - `cards.card`：`Y` 黃牌、`R` 紅牌、`YR` 兩黃變一紅
@@ -114,6 +118,7 @@ npm run dev
 - [x] 可以選擇球隊，不只看曼聯
 - [x] 美化排版
 - [x] 淺色 / 深色主題切換
+- [x] 繁體中文版頁面
 
 ## 備註
 
