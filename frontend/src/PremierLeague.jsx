@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router'
 import MatchCard from './MatchCard.jsx'
 import Summary from './Summary.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
 import LanguageSwitch from './LanguageSwitch.jsx'
-import { TEXT, LanguageContext, translateTeam } from './i18n.js'
+import { TEXT, LanguageContext, translateTeam, usePageLanguage } from './i18n.js'
 
 const API = 'http://localhost:8000'
 
 function PremierLeague({ lang }) {
   const t = TEXT[lang]
   const [teams,setTeams] = useState([])
-  const [team,setTeam] = useState("Man Utd")
-  const [matches, setMatches] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const team = searchParams.get('team') ?? 'Man Utd' //網址取出 team，沒有的話預設 'Man Utd'。
+  const [result, setResult] = useState({ team: null, matches: [], error: null })
+
+  const loading = result.team !== team
+  const matches = result.matches
+  const error = loading ? null : result.error
 
   useEffect(()=>{
     fetch(`${API}/api/teams`)
@@ -28,24 +33,18 @@ function PremierLeague({ lang }) {
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       return res.json()
     })
-    .then((data) => {if(!ignore) setMatches(data)})
-    .catch((err) => {if(!ignore) setError(err.message)})
-    .finally(() => {if (!ignore) setLoading(false)})
+    .then((data) => {if (!ignore) setResult({ team, matches: data, error: null })})
+    .catch((err) => {if (!ignore) setResult({ team, matches: [], error: err.message })})
 
     return () => {
         ignore = true
       }
     }, [team])
   
-  useEffect(() => {
-    document.documentElement.lang = lang === 'zh' ? 'zh-Hant-TW' : 'en'
-    document.title = t.pageTitle
-  }, [lang, t])
+  usePageLanguage(lang)
 
   function handleTeamChange(e) {
-    setTeam(e.target.value)
-    setLoading(true)
-    setError(null)
+    setSearchParams({ team: e.target.value })
   }
   const finished = matches.filter((m) => m.status === 'C')
   const upcoming = matches.filter((m) => m.status === 'U')
@@ -75,12 +74,12 @@ function PremierLeague({ lang }) {
       <h2 className="section-title">{t.finished}</h2>
       <div className="match-list">
         {finished.map(
-          (m) =>(<MatchCard key={m.gameweek} match={m} team={team}/>)
+          (m) =>(<MatchCard key={m.id} match={m} team={team}/>)
         )}
       </div>
       <h2 className="section-title">{t.upcoming}</h2>
       <div className="match-list">
-        {upcoming.map((m) => <MatchCard key={m.gameweek} match={m} team={team}/>)}
+        {upcoming.map((m) => <MatchCard key={m.id} match={m} team={team}/>)}
       </div>
     </div>
     )}

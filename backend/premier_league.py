@@ -1,5 +1,5 @@
 import json
-import urllib.request
+from urllib import request, error
 from datetime import datetime, timezone
 
 
@@ -18,29 +18,30 @@ def build_summary(team_name):
         if match["status"] == "C":
             match["goal_events"], match["card_events"] = find_match_details(int(match["id"])) #找進球時間跟紅黃牌
 
-    summary = []
-    for match in matchs:
-        home, away = match["teams"]
-        names = {"home": home["team"]["shortName"], "away": away["team"]["shortName"]}
-        finished = match["status"] == "C"
-        summary.append({
-            "gameweek": int(match["gameweek"]["gameweek"]),
-            "kickoff": match["kickoff"]["label"],
-            "kickoff_ms": int(match["kickoff"]["millis"]),
-            "status" : match["status"],
-            "home": {"team": names["home"], "score": int(home["score"]) if finished else None},
-            "away": {"team": names["away"], "score": int(away["score"]) if finished else None},
-            "goals": [{"time": g["time"], "team": names[g["side"]], "player": g["player"], "type": g["type"]}
-                    for g in match.get("goal_events", [])],
-            "cards": [{"time": c["time"], "team": names[c["side"]], "player": c["player"], "card": c["card"]}
-                    for c in match.get("card_events", [])],
-        })
+    return [format_match(match) for match in matchs]
 
-    return summary
+def format_match(match):
+    home, away = match["teams"]
+    names = {"home": home["team"]["shortName"], "away": away["team"]["shortName"]}
+    finished = match["status"] == "C"
+    return {
+        "id": int(match["id"]),
+        "gameweek": int(match["gameweek"]["gameweek"]),
+        "kickoff": match["kickoff"]["label"],
+        "kickoff_ms": int(match["kickoff"]["millis"]),
+        "status": match["status"],
+        "home": {"team": names["home"], "score": int(home["score"]) if finished else None},
+        "away": {"team": names["away"], "score": int(away["score"]) if finished else None},
+        "goals": [{"time": g["time"], "team": names[g["side"]], "player": g["player"], "type": g["type"]}
+                for g in match.get("goal_events", [])],
+        "cards": [{"time": c["time"], "team": names[c["side"]], "player": c["player"], "card": c["card"]}
+                for c in match.get("card_events", [])],
+        }
+
 
 def get(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    return json.load(urllib.request.urlopen(req))
+    req = request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    return json.load(request.urlopen(req))
 
 def find_team_id(teams,team_name):
     for team in teams:
@@ -70,8 +71,9 @@ def find_recently_matchs(fixtures):
     return last + upcoming
 
 def find_match_details(match_id):
-    match = get(f"{PULSE}/fixtures/{match_id}")
+    return parse_events(get(f"{PULSE}/fixtures/{match_id}"))
 
+def parse_events(match):
     names = {} # 球員 id -> 名字
     for team in match["teamLists"]:
         for player in team["lineup"] + team["substitutes"]:
@@ -102,6 +104,42 @@ def find_match_details(match_id):
 def get_teams():
     teams = get(f"{PULSE}/compseasons/{SEASON_ID}/teams")
     return sorted(team["shortName"] for team in teams)
+
+
+def build_match_detail(match_id):
+    try:
+        match = get(f"{PULSE}/fixtures/{match_id}")
+    except error.HTTPError as e:
+        if e.code == 404:
+            return None
+        raise
+
+    finished = match["status"] == "C"
+    if finished:  # 還沒踢的比賽 teamLists 是 [None, None]
+        match["goal_events"], match["card_events"] = parse_events(match)
+
+    detail = format_match(match)
+    detail["ground"] = match.get("ground", {}).get("name")
+    detail["attendance"] = match.get("attendance")
+    detail["lineups"] = [parse_lineup(team_list, match) for team_list in match["teamLists"]] if finished else []
+    return detail
+
+def parse_lineup(team_list, match):
+    team_names = {int(t["team"]["id"]): t["team"]["shortName"] for t in match["teams"]}
+    return {
+        "team": team_names[int(team_list["teamId"])],
+        "formation": team_list.get("formation", {}).get("label"),
+        "starters": [parse_player(p) for p in team_list["lineup"]],
+        "substitutes": [parse_player(p) for p in team_list["substitutes"]],
+    }
+
+def parse_player(player):
+    return {
+        "name": player["name"]["display"],
+        "number": player.get("matchShirtNumber"),
+        "position": player.get("matchPosition"),
+        "captain": player.get("captain", False),
+    }
 
 if __name__ == "__main__":
     summary = build_summary("Man Utd")
