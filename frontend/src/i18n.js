@@ -72,8 +72,25 @@ const TEAM_ZH = {
 
 const GROUND_ZH = {
   "Emirates Stadium" : "酋長球場",
+  "Villa Park":"維拉公園球場",
+  "Vitality Stadium":"活力球場",
+  "Gtech Community Stadium":"布倫福社區球場",
   "Anfield":"安菲爾德球場",
-
+  "The City Ground":"城市足球場",
+  "Etihad Stadium":"伊蒂哈德球場",
+  "American Express Stadium":"美國運通球場",
+  "Stamford Bridge":"史丹福橋球場",
+  "Hill Dickinson Stadium":"希爾迪金森球場",
+  "Tottenham Hotspur Stadium":"托特納姆熱刺球場",
+  "The MKM Stadium":"MKM 球場",
+  "Elland Road":"艾倫路球場",
+  "St. James' Park":"聖詹姆斯公園球場",
+  "Portman Road":"波特曼路球場",
+  "Craven Cottage":"克雷文農舍球場",
+  "Coventry Building Society Arena":"考文垂建築協會球場",
+  "Old Trafford":"老特拉福德球場",
+  "Selhurst Park":"塞爾赫斯特公園球場",
+  "Stadium of Light":"光明球場",
 }
 
 export const LanguageContext = createContext('en')
