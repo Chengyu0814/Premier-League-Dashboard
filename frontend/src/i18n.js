@@ -94,7 +94,7 @@ export function useLang() {
     lang,
     t: TEXT[lang],
     teamName: (name) => translateTeam(name, lang),
-    gorundName:(gorund) => translateGround(gorund,lang)}
+    groundName:(gorund) => translateGround(gorund,lang)}
 }
 
 export function usePageLanguage(lang) {
